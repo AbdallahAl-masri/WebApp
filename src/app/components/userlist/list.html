@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="userListApp">
+  <head>
+    <title>User List</title>
+    <link rel="stylesheet" href="list.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body ng-controller="UserListController">
+    <div class="container">
+      <h1>USER LIST</h1>
+      <div class="search-bar">
+        <input
+          type="text"
+          ng-model="searchText"
+          placeholder="Search users..."
+        />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>PHOTO</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>MOBILE NUMBER</th>
+            <th>PASSWORD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in searchUsers()" ng-class-odd="'striped'">
+            <td></td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.mobile}}</td>
+            <td>
+              <span class="password" data-password="{{user.password}}"
+                >********</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="list.js"></script>
+  </body>
+</html>
