@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WebApp">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,18 +13,14 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
-  <body ng-app="WebApp">
-    <div class="login-container" ng-controller="LoginController">
-      <!-- Left Side Panel -->
+  <body ng-controller="LoginController">
+    <div class="login-container">
       <div class="left-panel">
         <h2>WebApp</h2>
         <p class="p">Create Your Account</p>
       </div>
 
-      <!-- Right Side Panel -->
       <div class="right-panel">
         <h3>Sign in to Your Account</h3>
         <p>Signin to create, discover and connect with the global community</p>
@@ -65,5 +61,9 @@
         </div>
       </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../Controllers/LoginController.js"></script>
   </body>
 </html>
