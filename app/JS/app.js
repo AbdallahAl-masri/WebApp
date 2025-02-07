@@ -1,20 +1,33 @@
-var app = angular.module('WebApp', ['ngRoute']);
+var app = angular.module("WebApp", ["ngRoute"]);
 
 app.config(function ($routeProvider, $locationProvider) {
   $routeProvider
-    .when('/add-user', {
-      templateUrl: '../Views/add-user.html',
-      
+    .when("/add-user", {
+      templateUrl: "../Views/add-user.html",
+      controller: "UserAddController",
     })
-    .when('/all-users', {
-      templateUrl: '../Views/all-users.html',
-      controller: 'UserController',
+    .when("/all-users", {
+      templateUrl: "../Views/all-users.html",
+      controller: "UserListController",
     })
-    .when('/import-excel', {
-      templateUrl: '../Views/import-excel.html',
+    .when("/import-excel", {
+      templateUrl: "../Views/import-excel.html",
+      controller: "ImportController",
     })
-    .otherwise({ redirectTo: '/add-user' });
+    .otherwise({ redirectTo: "/add-user" });
 
   // Enable hash-bang mode
-  $locationProvider.hashPrefix('!');
+  $locationProvider.hashPrefix("!");
+});
+
+$(document).ready(function () {
+  $(document).on("click", ".password", function () {
+    var $this = $(this);
+    var password = $this.data("password");
+    if ($this.text() === "********") {
+      $this.text(password);
+    } else {
+      $this.text("********");
+    }
+  });
 });

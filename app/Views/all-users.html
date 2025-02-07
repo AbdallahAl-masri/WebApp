@@ -3,10 +3,8 @@
   <head>
     <title>User List</title>
     <link rel="stylesheet" href="../CSS/user-list.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
-  <body ng-controller="UserController">
+  <body ng-controller="UserListController">
     <div class="container">
       <h1>USER LIST</h1>
       <div class="search-bar">
@@ -28,7 +26,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="user in searchUsers()" ng-class-odd="'striped'">
-            <td></td>
+            <td><img ng-src="{{user.photo}}" alt="User Photo" /></td>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.mobile}}</td>

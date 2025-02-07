@@ -5,13 +5,31 @@ body {
     padding: 0;
 }
 
-.container {
-    max-width: 600px;
-    margin: 2rem auto;
+main {
+    flex: 1;
+    padding: 2rem;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    max-width: none;
+    margin: 0;
+}
+
+main label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: bold;
+}
+
+main input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 header {
@@ -26,6 +44,15 @@ h1 {
 
 .form-group {
     margin-bottom: 1.5rem;
+}
+
+.form-group.row {
+    display: flex; /* Enable flexbox for the row */
+    gap: 20px; /* Adjust the gap between columns as needed */
+}
+
+.col {
+    flex: 1; /* Each column takes equal width */
 }
 
 label {

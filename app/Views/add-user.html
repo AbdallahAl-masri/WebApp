@@ -1,6 +1,83 @@
+<!DOCTYPE html>
 <html>
-  <head></head>
-  <body>
-    <h1>hi</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add User Form</title>
+    <link rel="stylesheet" href="../CSS/user-add.css" />
+  </head>
+  <body ng-controller="UserAddController">
+    <div class="container">
+      <header>
+        <h1>Add New User</h1>
+      </header>
+      <main>
+        <form ng-submit="addUser()">
+          <div class="form-group row">
+            <div class="col">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                ng-model="newUser.name"
+                placeholder="Enter name"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                ng-model="newUser.email"
+                placeholder="Enter email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col">
+              <label for="mobile">Mobile:</label>
+              <input
+                type="tel"
+                id="mobile"
+                ng-model="newUser.mobile"
+                placeholder="+1 (123) 456-7890"
+                required
+              />
+            </div>
+            <div class="col">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                ng-model="newUser.password"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="photo">Photo URL:</label>
+            <input
+              type="url"
+              id="photo"
+              ng-model="newUser.photo"
+              placeholder="Enter photo URL"
+            />
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn-submit">Add User</button>
+            <button type="reset" class="btn-reset">Reset</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </body>
 </html>

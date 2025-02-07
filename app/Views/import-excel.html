@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="userUploadApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Data Upload</title>
+    <link rel="stylesheet" href="../CSS/import-excel.css" />
+  </head>
+  <body ng-controller="ImportController">
+    <div class="container">
+      <h1>User Data Upload</h1>
+      <form id="uploadForm" ng-submit="uploadFile()">
+        <input type="file" id="excelFile" accept=".xlsx, .xls" required />
+        <button type="submit">Upload and Process</button>
+      </form>
+      <div class="progress">
+        <div class="progress-bar" ng-style="{'width': progress + '%'}"></div>
+      </div>
+      <div class="status">{{status}}</div>
+      <div class="summary" ng-show="showSummary">
+        <h2>Import Summary</h2>
+        <p>Total records: {{totalRecords}}</p>
+        <p>Processed records: {{processedRecords}}</p>
+        <p>Time taken: {{timeTaken}} seconds</p>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </body>
+</html>

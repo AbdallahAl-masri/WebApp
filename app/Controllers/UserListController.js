@@ -1,6 +1,4 @@
-var app = angular.module("WebApp", []);
-
-app.controller("UserController", function ($scope) {
+angular.module("WebApp").controller("UserListController", function ($scope) {
   $scope.users = [
     {
       photo: "https://randomuser.me/api/portraits/men/1.jpg",
@@ -43,16 +41,4 @@ app.controller("UserController", function ($scope) {
       );
     });
   };
-});
-
-$(document).ready(function () {
-  $(document).on("click", ".password", function () {
-    var $this = $(this);
-    var password = $this.data("password");
-    if ($this.text() === "********") {
-      $this.text(password);
-    } else {
-      $this.text("********");
-    }
-  });
 });
