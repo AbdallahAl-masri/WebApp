@@ -11,33 +11,47 @@
     <link rel="stylesheet" href="../CSS/layout.css" />
   </head>
   <body>
-    <div class="sidebar">
-      <h2>Web App</h2>
-      <nav>
-        <ul>
-          <li><a href="#!/add-user"><i class="fas fa-coins"></i> Add User</a></li>
-          <li><a href="#!/all-users"><i class="fas fa-shopping-cart"></i> All Users</a></li>
-          <li><a href="#!/import-excel"><i class="fas fa-paper-plane"></i> Import Excel</a></li>
-        </ul>
-      </nav>
-      </nav>
+    <div ng-if="isAuthenticated">
+      <div class="sidebar">
+        <h2>Web App</h2>
+        <nav>
+          <ul>
+            <li>
+              <a href="#!/add-user"><i class="fas fa-coins"></i> Add User</a>
+            </li>
+            <li>
+              <a href="#!/all-users"
+                ><i class="fas fa-shopping-cart"></i> All Users</a
+              >
+            </li>
+            <li>
+              <a href="#!/import-excel"
+                ><i class="fas fa-paper-plane"></i> Import Excel</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="main">
+        <div class="navbar">
+          <div class="search-bar">
+            <input type="text" placeholder="Search for results..." />
+          </div>
+          <div class="actions">
+            <i class="fas fa-cloud-sun"></i>
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+          </div>
+        </div>
+
+        <div class="content">
+          <div ng-view></div>
+        </div>
+      </div>
     </div>
-
-    <div class="main">
-      <div class="navbar">
-        <div class="search-bar">
-          <input type="text" placeholder="Search for results..." />
-        </div>
-        <div class="actions">
-          <i class="fas fa-cloud-sun"></i>
-          <i class="fas fa-bell"></i>
-          <i class="fas fa-user-circle"></i>
-        </div>
-      </div>
-
-      <div class="content">
-        <div ng-view></div>
-      </div>
+    <div ng-if="!isAuthenticated">
+      <div ng-view></div>
     </div>
     <!-- AngularJS and jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -48,5 +62,17 @@
     <script src="../Controllers/UserListController.js"></script>
     <script src="../Controllers/UserAddController.js"></script>
     <script src="../Controllers/ImportController.js"></script>
+    <script src="../Controllers/loginController.js"></script>
+    <script>
+      var isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+      angular.module("WebApp").run(function ($rootScope, $location) {
+        $rootScope.isAuthenticated = isAuthenticated;
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+          if (!isAuthenticated && next.$$route.originalPath !== "/") {
+            $location.path("/"); // Redirect to login if not authenticated
+          }
+        });
+      });
+    </script>
   </body>
 </html>

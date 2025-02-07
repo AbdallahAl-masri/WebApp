@@ -2,6 +2,10 @@ var app = angular.module("WebApp", ["ngRoute"]);
 
 app.config(function ($routeProvider, $locationProvider) {
   $routeProvider
+    .when("/login", {
+      templateUrl: "../Views/index.html",
+      controller: "LoginController",
+    })
     .when("/add-user", {
       templateUrl: "../Views/add-user.html",
       controller: "UserAddController",
@@ -14,7 +18,7 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: "../Views/import-excel.html",
       controller: "ImportController",
     })
-    .otherwise({ redirectTo: "/add-user" });
+    .otherwise({ redirectTo: "/login" });
 
   // Enable hash-bang mode
   $locationProvider.hashPrefix("!");
