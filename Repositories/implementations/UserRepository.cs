@@ -18,6 +18,25 @@ namespace WebApp.Repositories.implementations
             await _context.SaveChangesAsync();
         }
 
+        public async Task CreateListAsync(List<Users> entities)
+        {
+            if (entities == null || entities.Count == 0)
+            {
+                throw new ArgumentNullException("entity");
+            }
+
+            try
+            {
+                await _context.Users.AddRangeAsync(entities);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle database update issues
+                throw new Exception("An error occurred while saving the list of users.", ex);
+            }
+        }
+
         public async Task DeleteAsync(Users entity)
         {
             if (entity == null)
