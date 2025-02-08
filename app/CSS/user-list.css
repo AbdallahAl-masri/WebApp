@@ -106,3 +106,36 @@ th {
         display: block;
     }
 }
+
+.pagination-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .pagination {
+    list-style: none;
+    display: inline-flex;
+    padding: 0;
+  }
+
+  .pagination li {
+    margin: 0 5px;
+  }
+
+  .pagination li:hover {
+    cursor: pointer;
+  }
+
+  .pagination a {
+    display: block;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    text-decoration: none;
+    border-radius: 3px;
+    color: #333;
+  }
+
+  .pagination li.active a {
+    background-color: #007bff;
+    color: white;
+  }

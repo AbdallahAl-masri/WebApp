@@ -35,56 +35,44 @@ angular
         };
 
         reader.readAsArrayBuffer(file);
+      } else {
+        $scope.status = "Please select a file.";
       }
     };
 
     function processData(data, startTime) {
       var batchSize = 50000;
       var currentIndex = 0;
-      var totalBatches = Math.ceil(data.length / batchSize); // Calculate total batches
+      var totalBatches = Math.ceil(data.length / batchSize);
       var processedBatches = 0;
 
       function processBatch() {
         var endIndex = Math.min(currentIndex + batchSize, data.length);
         var batch = data.slice(currentIndex, endIndex);
 
-        $http
-          .post("https://localhost:7184/api/user/import", batch) // Send batch to backend
-          .then(
-            function (response) {
-              // Success
-              if (response.status === 200) {
-                // Check the status code!
-                $scope.processedBatches++;
-                $scope.progress =
-                  ($scope.processedBatches / totalBatches) * 100;
-                $scope.processedRecords += batch.length;
+        $http.post("https://localhost:7184/api/user/import", batch).then(
+          function (response) {
+            processedBatches++;
+            $scope.processedRecords += batch.length;
+            $scope.progress = (processedBatches / totalBatches) * 100;
 
-                if (currentIndex < data.length - batchSize) {
-                  currentIndex = endIndex;
-
-                  processBatch();
-                } else {
-                  var endTime = new Date().getTime();
-                  $scope.timeTaken = ((endTime - startTime) / 1000).toFixed(2);
-                  $scope.status = "Import complete!";
-                  $scope.showSummary = true;
-                }
-              } else {
-                console.error(
-                  "Unexpected status code:",
-                  response.status,
-                  response.data
-                ); // Log the actual status and data
-                $scope.status = "Error during import. Unexpected response.";
-              }
-            },
-            function (error) {
-              // Error
-              console.error("HTTP error:", error.status, error.data); // Log the HTTP error details
-              $scope.status = "Error during import. HTTP error.";
+            if (currentIndex < data.length) {
+              currentIndex = endIndex;
+              processBatch(); // Process next batch
+            } else {
+              var endTime = new Date().getTime();
+              $scope.timeTaken = ((endTime - startTime) / 1000).toFixed(2);
+              $scope.status = "Import complete!";
+              $scope.showSummary = true;
+              $scope.$applyAsync(); // Ensure UI updates
             }
-          );
+          },
+          function (error) {
+            console.error("HTTP error:", error.status, error.data);
+            $scope.status = "Error during import. Please check console.";
+            $scope.$applyAsync();
+          }
+        );
       }
 
       processBatch();
