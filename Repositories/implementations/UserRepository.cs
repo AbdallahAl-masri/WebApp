@@ -75,5 +75,18 @@ namespace WebApp.Repositories.implementations
             _context.Users.Update(entity);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<int> GetTotalUsersAsync()
+        {
+            return await _context.Users.CountAsync();
+        }
+
+        public async Task<IEnumerable<Users>> GetUsersPaginatedAsync(int page, int pageSize)
+        {
+            return await _context.Users
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }

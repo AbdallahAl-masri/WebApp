@@ -156,5 +156,39 @@ namespace WebApp.Controllers
 
             return Ok();
         }
+
+        [HttpGet("paginated")] // Clear and descriptive route
+        public async Task<IActionResult> GetUsersPaginated(
+        [FromQuery] int page = 1, // Default to page 1
+        [FromQuery] int pageSize = 500) // Default to 500 per page
+        {
+            if (page < 1 || pageSize < 1)
+            {
+                return BadRequest("Page and pageSize must be greater than 0.");
+            }
+
+            var totalUsers = await _userRepository.GetTotalUsersAsync(); // New method (see below)
+
+            var totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
+
+            if (page > totalPages && totalPages > 0) // Handle cases where page requested is higher than total pages
+            {
+                return NotFound("No users found on this page."); // Or BadRequest, depending on your preference
+            }
+
+
+            var users = await _userRepository.GetUsersPaginatedAsync(page, pageSize); // New method (see below)
+
+            var result = new
+            {
+                TotalUsers = totalUsers,
+                TotalPages = totalPages,
+                Page = page,
+                PageSize = pageSize,
+                Users = users
+            };
+
+            return Ok(result);
+        }
     }
 }
