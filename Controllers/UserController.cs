@@ -52,7 +52,7 @@ namespace WebApp.Controllers
             user.Name = model.Name;
             user.Email = model.Email;
             user.Password = model.Password;
-            user.MobileNumber = model.MobileNumber;
+            user.MobileNumber = model.MobileNo;
             user.PhotoUrl = model.PhotoUrl;
 
             await _userRepository.UpdateAsync(user);
@@ -72,7 +72,7 @@ namespace WebApp.Controllers
                 Name = model.Name,
                 Email = model.Email,
                 Password = model.Password,
-                MobileNumber = model.MobileNumber,
+                MobileNumber = model.MobileNo,
                 PhotoUrl = model.PhotoUrl,
             };
 
@@ -115,7 +115,7 @@ namespace WebApp.Controllers
                         Name = userModel.Name,
                         Email = userModel.Email,
                         Password = userModel.Password,
-                        MobileNumber = userModel.MobileNumber,
+                        MobileNumber = userModel.MobileNo,
                         PhotoUrl = userModel.PhotoUrl,
                     };
                     users.Add(user);
@@ -127,9 +127,8 @@ namespace WebApp.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception (essential for debugging)
-                System.Diagnostics.Debug.WriteLine(ex);  // Or use your logging framework
-                return StatusCode(StatusCodes.Status500InternalServerError);// Return 500 Internal Server Error
+                System.Diagnostics.Debug.WriteLine(ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred during user import: " + ex.Message });
             }
         }
 

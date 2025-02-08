@@ -11,7 +11,7 @@ using WebApp.Entities.Context;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(WebAppContext))]
-    [Migration("20250208144753_first")]
+    [Migration("20250208173340_first")]
     partial class first
     {
         /// <inheritdoc />
