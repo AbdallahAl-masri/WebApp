@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="WebApp">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../CSS/layout.css" />
+    <title>Web App</title>
+    <link rel="stylesheet" href="../CSS/index.css" />
   </head>
   <body>
-    <!-- <div ng-show="isAuthenticated"> -->
     <div class="sidebar">
       <h2>Web App</h2>
       <nav>
@@ -49,12 +42,10 @@
         <div ng-view></div>
       </div>
     </div>
-    <!-- </div>
-    <div ng-show="!isAuthenticated"><div ng-view></div></div> -->
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="../JS/app.js"></script>
     <script src="../Controllers/UserListController.js"></script>
@@ -62,7 +53,7 @@
     <script src="../Controllers/ImportController.js"></script>
     <script src="../Controllers/loginController.js"></script>
 
-    <!-- <script>
+    <script>
       angular.module("WebApp").run(function ($rootScope, $location) {
         $rootScope.isAuthenticated =
           localStorage.getItem("isAuthenticated") === "true";
@@ -76,6 +67,6 @@
           }
         });
       });
-    </script> -->
+    </script>
   </body>
 </html>

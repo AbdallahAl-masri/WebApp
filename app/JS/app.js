@@ -35,3 +35,16 @@ $(document).ready(function () {
     }
   });
 });
+
+$(".toggle-password").click(function () {
+  var input = $(this).prev("input");
+  var icon = $(this).find("i"); // Get the icon element
+
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+    icon.removeClass("bx-hide").addClass("bx-show"); // Change icon
+  } else {
+    input.attr("type", "password");
+    icon.removeClass("bx-show").addClass("bx-hide"); // Change back
+  }
+});

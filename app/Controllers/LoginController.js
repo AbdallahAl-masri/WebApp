@@ -21,6 +21,7 @@ angular
               console.log("Login successful:", response.data);
               localStorage.setItem("isAuthenticated", "true");
               $rootScope.isAuthenticated = true;
+              $("body").addClass("authenticated"); // Add the class
               $location.path("/add-user"); // Or wherever you want to redirect
             },
             function (error) {
@@ -36,18 +37,5 @@ angular
             }
           );
       };
-
-      $(".toggle-password").click(function () {
-        var input = $(this).prev("input");
-        var icon = $(this).find("i"); // Get the icon element
-
-        if (input.attr("type") === "password") {
-          input.attr("type", "text");
-          icon.removeClass("bx-hide").addClass("bx-show"); // Change icon
-        } else {
-          input.attr("type", "password");
-          icon.removeClass("bx-show").addClass("bx-hide"); // Change back
-        }
-      });
     }
   );
