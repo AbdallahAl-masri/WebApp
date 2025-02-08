@@ -25,3 +25,6 @@ To run this project, you need to have the following installed:
 ### Running the Angular Frontend
 
 Open the index.html file and run it with Live Server.
+
+### Note
+there is a sql.bak in the master branch for the database
