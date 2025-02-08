@@ -3,7 +3,38 @@
   <head>
     <title>User List</title>
     <link rel="stylesheet" href="../CSS/user-list.css" />
+    <style>
+      .pagination-container {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .pagination {
+        list-style: none;
+        display: inline-flex;
+        padding: 0;
+      }
+
+      .pagination li {
+        margin: 0 5px;
+      }
+
+      .pagination a {
+        display: block;
+        padding: 5px 10px;
+        background-color: #f0f0f0;
+        text-decoration: none;
+        border-radius: 3px;
+        color: #333;
+      }
+
+      .pagination li.active a {
+        background-color: #007bff;
+        color: white;
+      }
+    </style>
   </head>
+
   <body ng-controller="UserListController">
     <div class="container">
       <h1>USER LIST</h1>
@@ -25,8 +56,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in searchUsers()" ng-class-odd="'striped'">
-            <td><img ng-src="{{user.photo}}" alt="User Photo" /></td>
+          <tr
+            ng-repeat="user in displayedUsers track by $index"
+            ng-class-odd="'striped'"
+          >
+            <td><img ng-src="{{user.photoUrl}}" alt="User Photo" /></td>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.mobileNumber}}</td>
@@ -38,6 +72,17 @@
           </tr>
         </tbody>
       </table>
+
+      <div ng-if="totalPages >= 1" class="pagination-container">
+        <ul class="pagination">
+          <li
+            ng-repeat="page in pages"
+            ng-class="{'active': page === currentPage}"
+          >
+            <a href="#" ng-click="setPage(page)">{{ page }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>

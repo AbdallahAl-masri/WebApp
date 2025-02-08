@@ -107,6 +107,46 @@ body:not(.authenticated) .main {
 }
 
 .content {
-  flex: 1; /* Key: Allow content to expand */
+  flex: 1;
   padding: 20px;
+}
+
+.user-actions {
+  position: relative;
+  display: inline-block;
+}
+
+.user-icon {
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  top: 5%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 150px;
+}
+
+.dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  padding: 10px;
+}
+
+.dropdown a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #f0f0f0;
 }

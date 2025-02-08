@@ -1,15 +1,12 @@
 angular
-  .module("WebApp") // Make sure "WebApp" is defined in app.js
+  .module("WebApp")
   .controller(
     "LoginController",
     function ($scope, $http, $location, $rootScope) {
       $scope.email = "";
       $scope.password = "";
-      $scope.loginError = null; // Initialize error message
 
       $scope.submitForm = function () {
-        $scope.loginError = null; // Clear any previous errors
-
         $http
           .post("https://localhost:7184/api/user/login", {
             // Correct API endpoint
@@ -18,24 +15,36 @@ angular
           })
           .then(
             function (response) {
-              console.log("Login successful:", response.data);
+              console.log("Login successful");
               localStorage.setItem("isAuthenticated", "true");
               $rootScope.isAuthenticated = true;
-              $("body").addClass("authenticated"); // Add the class
-              $location.path("/add-user"); // Or wherever you want to redirect
+              $("body").addClass("authenticated");
+              $location.path("/dashboard");
             },
             function (error) {
               console.error("HTTP error:", error);
               if (error.status === 400 || error.status === 401) {
-                // Check for 400 or 401
-                $scope.loginError =
-                  "Invalid email or password. Please try again.";
+                alert("Invalid email or password. Please try again.");
               } else {
-                $scope.loginError =
-                  "An error occurred. Please try again later.";
+                alert("An error occurred. Please try again later.");
               }
             }
           );
       };
     }
   );
+
+$(document).ready(function () {
+  $(".toggle-password").click(function () {
+    var input = $(this).prev("input");
+    var icon = $(this).find("i");
+
+    if (input.attr("type") === "password") {
+      input.attr("type", "text");
+      icon.removeClass("bx-hide").addClass("bx-show");
+    } else {
+      input.attr("type", "password");
+      icon.removeClass("bx-show").addClass("bx-hide");
+    }
+  });
+});

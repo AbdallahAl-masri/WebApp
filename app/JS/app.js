@@ -6,6 +6,9 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: "../Views/login.html",
       controller: "LoginController",
     })
+    .when("/dashboard", {
+      templateUrl: "../Views/dashboard.html",
+    })
     .when("/add-user", {
       templateUrl: "../Views/add-user.html",
       controller: "UserAddController",
@@ -18,7 +21,7 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: "../Views/import-excel.html",
       controller: "ImportController",
     })
-    .otherwise({ redirectTo: "/add-user" });
+    .otherwise({ redirectTo: "/dashboard" });
 
   // Enable hash-bang mode
   $locationProvider.hashPrefix("!");
@@ -34,17 +37,4 @@ $(document).ready(function () {
       $this.text("********");
     }
   });
-});
-
-$(".toggle-password").click(function () {
-  var input = $(this).prev("input");
-  var icon = $(this).find("i"); // Get the icon element
-
-  if (input.attr("type") === "password") {
-    input.attr("type", "text");
-    icon.removeClass("bx-hide").addClass("bx-show"); // Change icon
-  } else {
-    input.attr("type", "password");
-    icon.removeClass("bx-show").addClass("bx-hide"); // Change back
-  }
 });

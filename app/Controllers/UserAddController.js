@@ -1,7 +1,6 @@
 angular
   .module("WebApp")
   .controller("UserAddController", function ($scope, $http) {
-    // Inject $http
     $scope.users = [];
 
     $scope.newUser = {
@@ -15,39 +14,31 @@ angular
     $scope.addUser = function () {
       var user = angular.copy($scope.newUser);
 
-      $http
-        .post("https://localhost:7184/api/User", user) // Replace with your API endpoint
-        .then(
-          function (response) {
-            // Success - the user was created (and possibly authenticated)
-            console.log("Response from backend:", response.data);
-            console.log("Response from backend:", response.status);
-
-            // Check the response for success (e.g., HTTP status 200 or a specific success message)
-            if (response.status === 204) {
-              // Adjust as needed
-              $scope.users.push(user); // Add to local users array (if needed)
-              $scope.newUser = {
-                // Reset form
-                name: "",
-                email: "",
-                mobile: "",
-                password: "",
-                photo: "",
-              };
-              alert("User added successfully!");
-            } else {
-              // Handle backend errors
-              console.error("Backend error:", response.data);
-              alert("Error adding user. Please try again.");
-            }
-          },
-          function (error) {
-            // Error during the HTTP request
-            console.error("HTTP error:", error);
-            alert("An error occurred. Please try again later.");
+      $http.post("https://localhost:7184/api/User", user).then(
+        function (response) {
+          if (response.status === 204) {
+            $scope.users.push(user);
+            $scope.newUser = {
+              // Reset form
+              name: "",
+              email: "",
+              mobile: "",
+              password: "",
+              photo: "",
+            };
+            alert("User added successfully!");
+          } else {
+            // Handle backend errors
+            console.error("Backend error:", response.data);
+            alert("Error adding user. Please try again.");
           }
-        );
+        },
+        function (error) {
+          // Error during the HTTP request
+          console.error("HTTP error:", error);
+          alert("An error occurred. Please try again later.");
+        }
+      );
     };
 
     // jQuery function to add custom validation and formatting

@@ -30,7 +30,7 @@ angular
 
           var startTime = new Date().getTime();
 
-          $scope.status = "Uploading data in batches..."; // More descriptive status
+          $scope.status = "Uploading data in batches...";
           processData(jsonData, startTime);
         };
 
@@ -39,7 +39,7 @@ angular
     };
 
     function processData(data, startTime) {
-      var batchSize = 10000; // Adjust batch size as needed
+      var batchSize = 50000;
       var currentIndex = 0;
       var totalBatches = Math.ceil(data.length / batchSize); // Calculate total batches
       var processedBatches = 0;
@@ -69,11 +69,10 @@ angular
             function (error) {
               console.error("Error uploading batch:", error);
               $scope.status = "Error during import. Check console.";
-              // Handle error appropriately (e.g., retry, stop, etc.)
             }
           );
       }
 
-      processBatch(); // Start processing the first batch
+      processBatch();
     }
   });
