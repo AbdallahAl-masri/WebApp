@@ -76,10 +76,22 @@
       <div ng-if="totalPages >= 1" class="pagination-container">
         <ul class="pagination">
           <li
+            ng-click="previousPageBlock()"
+            ng-class="{'disabled': startPage === 1}"
+          >
+            <a>Previous</a>
+          </li>
+          <li
             ng-repeat="page in pages"
             ng-class="{'active': page === currentPage}"
           >
-            <a href="#" ng-click="setPage(page)">{{ page }}</a>
+            <a ng-click="setPage(page)">{{ page }}</a>
+          </li>
+          <li
+            ng-click="nextPageBlock()"
+            ng-class="{'disabled': endPage === totalPages}"
+          >
+            <a>Next</a>
           </li>
         </ul>
       </div>

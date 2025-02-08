@@ -52,23 +52,37 @@ angular
           .post("https://localhost:7184/api/user/import", batch) // Send batch to backend
           .then(
             function (response) {
-              processedBatches++;
-              $scope.progress = (processedBatches / totalBatches) * 100; // Update overall progress
-              $scope.processedRecords += batch.length; // Update processed records count
+              // Success
+              if (response.status === 200) {
+                // Check the status code!
+                $scope.processedBatches++;
+                $scope.progress =
+                  ($scope.processedBatches / totalBatches) * 100;
+                $scope.processedRecords += batch.length;
 
-              if (currentIndex < data.length) {
-                currentIndex = endIndex;
-                processBatch(); // Process next batch
+                if (currentIndex < data.length - batchSize) {
+                  currentIndex = endIndex;
+
+                  processBatch();
+                } else {
+                  var endTime = new Date().getTime();
+                  $scope.timeTaken = ((endTime - startTime) / 1000).toFixed(2);
+                  $scope.status = "Import complete!";
+                  $scope.showSummary = true;
+                }
               } else {
-                var endTime = new Date().getTime();
-                $scope.timeTaken = ((endTime - startTime) / 1000).toFixed(2);
-                $scope.status = "Import complete!";
-                $scope.showSummary = true;
+                console.error(
+                  "Unexpected status code:",
+                  response.status,
+                  response.data
+                ); // Log the actual status and data
+                $scope.status = "Error during import. Unexpected response.";
               }
             },
             function (error) {
-              console.error("Error uploading batch:", error);
-              $scope.status = "Error during import. Check console.";
+              // Error
+              console.error("HTTP error:", error.status, error.data); // Log the HTTP error details
+              $scope.status = "Error during import. HTTP error.";
             }
           );
       }
