@@ -1,66 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="WebApp">
   <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="../CSS/index.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="../CSS/layout.css" />
   </head>
-  <body ng-controller="LoginController">
-    <div class="login-container">
-      <div class="left-panel">
-        <h2>WebApp</h2>
-        <p class="p">Create Your Account</p>
-      </div>
-
-      <div class="right-panel">
-        <h3>Sign in to Your Account</h3>
-        <p>Signin to create, discover and connect with the global community</p>
-
-        <form ng-submit="submitForm()">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              ng-model="email"
-              required
-              placeholder="Enter your email"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-            <div class="toggle-password">
-              <input
-                type="password"
-                id="password"
-                ng-model="password"
-                required
-                placeholder="Enter your password"
-                style="flex: 1"
-              />
-              <i class="bx bx-hide toggle-icon"></i>
-            </div>
-          </div>
-
-          <button type="submit">Sign In</button>
-        </form>
-
-        <div class="links">
-          <a href="#">Forgot password?</a>
-          <a href="#">Register Here</a>
-        </div>
-      </div>
+  <body>
+    <!-- <div ng-show="isAuthenticated"> -->
+    <div class="sidebar">
+      <h2>Web App</h2>
+      <nav>
+        <ul>
+          <li>
+            <a href="#!/add-user"><i class="fas fa-coins"></i> Add User</a>
+          </li>
+          <li>
+            <a href="#!/all-users"
+              ><i class="fas fa-shopping-cart"></i> All Users</a
+            >
+          </li>
+          <li>
+            <a href="#!/import-excel"
+              ><i class="fas fa-paper-plane"></i> Import Excel</a
+            >
+          </li>
+        </ul>
+      </nav>
     </div>
 
+    <div class="main">
+      <div class="navbar">
+        <div class="search-bar">
+          <input type="text" placeholder="Search for results..." />
+        </div>
+        <div class="actions">
+          <i class="fas fa-cloud-sun"></i>
+          <i class="fas fa-bell"></i>
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </div>
+
+      <div class="content">
+        <div ng-view></div>
+      </div>
+    </div>
+    <!-- </div>
+    <div ng-show="!isAuthenticated"><div ng-view></div></div> -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="../JS/app.js"></script>
+    <script src="../Controllers/UserListController.js"></script>
+    <script src="../Controllers/UserAddController.js"></script>
+    <script src="../Controllers/ImportController.js"></script>
+    <script src="../Controllers/loginController.js"></script>
+
+    <!-- <script>
+      angular.module("WebApp").run(function ($rootScope, $location) {
+        $rootScope.isAuthenticated =
+          localStorage.getItem("isAuthenticated") === "true";
+
+        $rootScope.$on("$routeChangeSuccess", function (event, current) {
+          if (
+            !$rootScope.isAuthenticated &&
+            current.$$route.originalPath !== "/login"
+          ) {
+            $location.path("/login");
+          }
+        });
+      });
+    </script> -->
   </body>
 </html>

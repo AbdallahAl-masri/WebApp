@@ -49,7 +49,7 @@ angular
         var batch = data.slice(currentIndex, endIndex);
 
         $http
-          .post("YOUR_API_ENDPOINT", batch) // Send batch to backend
+          .post("https://localhost:7184/api/user/import", batch) // Send batch to backend
           .then(
             function (response) {
               processedBatches++;

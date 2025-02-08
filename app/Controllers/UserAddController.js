@@ -21,9 +21,10 @@ angular
           function (response) {
             // Success - the user was created (and possibly authenticated)
             console.log("Response from backend:", response.data);
+            console.log("Response from backend:", response.status);
 
             // Check the response for success (e.g., HTTP status 200 or a specific success message)
-            if (response.status === 200 || response.data.success === true) {
+            if (response.status === 204) {
               // Adjust as needed
               $scope.users.push(user); // Add to local users array (if needed)
               $scope.newUser = {
@@ -58,55 +59,7 @@ angular
         if (value.length > 10) {
           value = value.slice(0, 10); // Limit to 10 digits
         }
-        var formattedValue = formatPhoneNumber(value);
-        input.val(formattedValue);
-      });
-
-      // Format phone number as user types
-      function formatPhoneNumber(phoneNumber) {
-        if (phoneNumber.length <= 3) {
-          return phoneNumber;
-        }
-
-        if (phoneNumber.length <= 6) {
-          return phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3);
-        }
-
-        return (
-          phoneNumber.slice(0, 2) +
-          " " +
-          phoneNumber.slice(2, 6) +
-          " " +
-          phoneNumber.slice(6)
-        );
-      }
-
-      // Password strength indicator (you can customize this)
-      $("#password").on("input", function () {
-        var password = $(this).val();
-        var strength = 0;
-        if (password.length >= 8) strength++;
-        if (password.match(/[a-z]+/)) strength++;
-        if (password.match(/[A-Z]+/)) strength++;
-        if (password.match(/[0-9]+/)) strength++;
-        if (password.match(/[$@#&!]+/)) strength++;
-
-        var strengthText = "";
-        switch (strength) {
-          case 0:
-          case 1:
-          case 2:
-            strengthText = "Weak";
-            break;
-          case 3:
-            strengthText = "Medium";
-            break;
-          case 4:
-          case 5:
-            strengthText = "Strong";
-            break;
-        }
-        $("#password-strength").text("Password Strength: " + strengthText);
+        input.val(value);
       });
     });
   });

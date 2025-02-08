@@ -1,50 +1,52 @@
 angular
-  .module("WebApp", []) // Define the module (crucial!)
+  .module("WebApp") // Make sure "WebApp" is defined in app.js
   .controller(
     "LoginController",
     function ($scope, $http, $location, $rootScope) {
-      // Remove $location
       $scope.email = "";
       $scope.password = "";
+      $scope.loginError = null; // Initialize error message
 
       $scope.submitForm = function () {
+        $scope.loginError = null; // Clear any previous errors
+
         $http
-          .post("https://localhost:7184/api/User/login", {
-            // Replace with your API endpoint
+          .post("https://localhost:7184/api/user/login", {
+            // Correct API endpoint
             email: $scope.email,
             password: $scope.password,
           })
           .then(
             function (response) {
-              // Success
               console.log("Login successful:", response.data);
               localStorage.setItem("isAuthenticated", "true");
-              $rootScope.isAuthenticated = true; // Update rootScope
-              debugger;
-              $location.path("/add-user");
-              // window.location.href = "add-user.html"; // Or the appropriate URL and path
+              $rootScope.isAuthenticated = true;
+              $location.path("/add-user"); // Or wherever you want to redirect
             },
             function (error) {
-              // Error
               console.error("HTTP error:", error);
-              if (error.status === 400) {
-                alert("Invalid email or password. Please try again.");
+              if (error.status === 400 || error.status === 401) {
+                // Check for 400 or 401
+                $scope.loginError =
+                  "Invalid email or password. Please try again.";
               } else {
-                alert("An error occurred. Please try again later.");
+                $scope.loginError =
+                  "An error occurred. Please try again later.";
               }
             }
           );
       };
 
-      // Toggle password visibility
       $(".toggle-password").click(function () {
         var input = $(this).prev("input");
+        var icon = $(this).find("i"); // Get the icon element
+
         if (input.attr("type") === "password") {
           input.attr("type", "text");
-          $(this).text("Hide");
+          icon.removeClass("bx-hide").addClass("bx-show"); // Change icon
         } else {
           input.attr("type", "password");
-          $(this).text("Show");
+          icon.removeClass("bx-show").addClass("bx-hide"); // Change back
         }
       });
     }
