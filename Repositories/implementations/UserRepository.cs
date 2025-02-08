@@ -61,9 +61,9 @@ namespace WebApp.Repositories.implementations
 
         public async Task<Users> GetByAsync(Expression<Func<Users, bool>> expression)
         {
-            var item = await _context.Users.FindAsync(expression);
+            var item = await _context.Users.FirstOrDefaultAsync(expression);
 
-            return item ?? null;
+            return item;
         }
 
         public async Task UpdateAsync(Users entity)
