@@ -13,19 +13,19 @@ body {
 }
 
 body.authenticated .sidebar {
-  display: block; /* Show sidebar when authenticated */
+  display: block;
 }
 
 body:not(.authenticated) .sidebar {
-  display: none; /* Hide sidebar when not authenticated */
+  display: none;
 }
 
 body.authenticated .main {
-  display: block; /* Show main content when authenticated */
+  display: block;
 }
 
 body:not(.authenticated) .main {
-  display: none; /* Hide main content when not authenticated */
+  display: none;
 }
 
 .sidebar {
