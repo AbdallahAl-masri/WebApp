@@ -1,6 +1,6 @@
 # WebApp
 
-This is a web application project written in C#.
+This is a web application project written in C# for backend with EF core and SQL Server for database, AngularJS for frontend.
 
 ## Overview
 
