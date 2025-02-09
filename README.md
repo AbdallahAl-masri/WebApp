@@ -27,4 +27,4 @@ To run this project, you need to have the following installed:
 Open the index.html file and run it with Live Server.
 
 ### Note
-there is a sql.bak in the master branch for the database
+there is a WebAPP.bak file in the master branch for the database.
